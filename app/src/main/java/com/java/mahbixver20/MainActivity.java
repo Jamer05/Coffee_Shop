@@ -47,13 +47,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
-        findViewById(R.id.drawerLayout).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
-        });
+
     }
 
     public void act2() {
@@ -66,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
