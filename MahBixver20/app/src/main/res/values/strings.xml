@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">MahBix Coffee version</string>
-    <string name="button">Button</string>
-    <string name="search">Search...</string>
-    <string name="todo">TODO</string>
-    <string name="jamer_s_coffee">Jamer\'s Coffee</string>
-    <string name="popular">Popular</string>
-    <string name="message">Message</string>
-</resources>
