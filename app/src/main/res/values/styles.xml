@@ -1,11 +1,12 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#070707</item>
         <item name="colorAccent">@color/colorPrimaryDark</item>
         <item name="android:colorPrimaryDark">#C0C0C0</item>
+        <item name="android:forceDarkAllowed">false</item>
 
     </style>
 

@@ -33,6 +33,6 @@
     <fragment
         android:id="@+id/menuHome"
         android:name="com.java.mahbixver20.ProfileFragment"
-        android:label="Profile"
+        android:label="Home"
         tools:layout="@layout/fragment_profile" />
 </navigation>
