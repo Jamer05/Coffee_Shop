@@ -1,15 +1,6 @@
 package com.java.mahbixver20;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -17,13 +8,20 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
+
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,35 +31,45 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
-        SpannableStringBuilder str = new SpannableStringBuilder("MahBix Coffee version");
-        str.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 5, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        getSupportActionBar().setTitle(str);
-        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#4267b2\"><b>" + getString(R.string.app_name)+"<b><//font>"));
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
-        button = findViewById(R.id.button4);
-        button.setOnClickListener(new View.OnClickListener() {
+        //To click the menu icon
+        final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+
+        findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                act2();
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
             }
         });
 
 
+        //to view with fragment
+        NavigationView navigationView = findViewById(R.id.navigationMenu);
+        navigationView.setItemIconTintList(null);
+
+        NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
+        NavigationUI.setupWithNavController(navigationView, navController);
+
+
+        //To Customize the action bar text
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        SpannableStringBuilder str = new SpannableStringBuilder("MahBix Coffee version");
+        str.setSpan(new android.text.style.StyleSpan(android.graphics.Typeface.BOLD), 5, 10, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        getSupportActionBar().setTitle(str);
+        getSupportActionBar().setTitle(Html.fromHtml("<font color=\"#4267b2\"><b>" + getString(R.string.app_name) + "<b><//font>"));
+
     }
 
-    public void act2() {
-        Intent intent = new Intent(this, Act2.class);
-        startActivity(intent);
-    }
-
+    //for sliding the menu drawer
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
 
-
+    //sample for menu with three dots
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
@@ -72,8 +80,5 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    Switch aSwitch;
-    SaveSharePreferences pref;
 
-
-    }
+}
