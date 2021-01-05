@@ -9,4 +9,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="jamer_coffee_shop">Jamer Coffee Shop</string>
+    <string name="recommended_apps">Recommended Apps</string>
+    <string name="previously_installed_apps">Previously Installed Apps</string>
 </resources>

@@ -15,7 +15,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        getWindow().setStatusBarColor(ContextCompat.getColor(HomeActivity.this,R.color.colorPrimary));
+        getWindow().setStatusBarColor(ContextCompat.getColor(HomeActivity.this, R.color.colorPrimary));
         setContentView(R.layout.activity_home);
         //hiding actionbar
         ActionBar actionBar = getSupportActionBar();
@@ -25,10 +25,10 @@ public class HomeActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(HomeActivity.this,MainActivity.class));
+                startActivity(new Intent(HomeActivity.this, MainActivity.class));
                 finish();
             }
-        },4000);
+        }, 4000);
     }
 
 }
