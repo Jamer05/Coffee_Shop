@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MahBix Coffee version</string>
+    <string name="button">Button</string>
+    <string name="search">Search...</string>
+    <string name="todo">TODO</string>
+    <string name="jamer_s_coffee">Jamer\'s Coffee</string>
+    <string name="popular">Popular</string>
+    <string name="message">Message</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="jamer_coffee_shop">Jamer Coffee Shop</string>
+    <string name="recommended_apps">Recommended Apps</string>
+    <string name="previously_installed_apps">Previously Installed Apps</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

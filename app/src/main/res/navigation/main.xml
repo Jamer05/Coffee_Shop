@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    app:startDestination="@id/menuProfile">
+
+    <fragment
+        android:id="@+id/menuInbox"
+        android:name="com.java.mahbixver20.InboxFragment"
+        android:label="Inbox"
+        tools:layout="@layout/fragment_inbox" />
+    <fragment
+        android:id="@+id/menuSupport"
+        android:name="com.java.mahbixver20.SettingsFragment"
+        android:label="Support"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/menuOrder"
+        android:name="com.java.mahbixver20.OrderFragment"
+        android:label="fragment_order"
+        tools:layout="@layout/fragment_order" />
+    <fragment
+        android:id="@+id/menuInfo"
+        android:name="com.java.mahbixver20.InformationFragment"
+        android:label="Information"
+        tools:layout="@layout/fragment_information" />
+    <fragment
+        android:id="@+id/menuNotification"
+        android:name="com.java.mahbixver20.NotificationFragment"
+        android:label="Notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/menuProfile"
+        android:name="com.java.mahbixver20.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+
+</navigation>
