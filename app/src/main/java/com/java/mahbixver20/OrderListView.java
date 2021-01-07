@@ -4,9 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -18,7 +22,6 @@ public class OrderListView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_list_view);
-
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
@@ -37,11 +40,20 @@ public class OrderListView extends AppCompatActivity {
                     case R.id.home_main:
                         startActivity(new Intent(getApplicationContext()
                                 , MainActivity.class));
-                        overridePendingTransition(0, 0);
+                        overridePendingTransition(3, 3);
                         return true;
                 }
                 return false;
             }
         });
+        final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout1);
+
+        findViewById(R.id.imageMenu1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
     }
+
 }

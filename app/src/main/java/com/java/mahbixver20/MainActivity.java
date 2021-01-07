@@ -33,7 +33,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     RecyclerView mList1, mList2;
     List<App> appList;
     private Button button;
@@ -45,20 +45,20 @@ public class MainActivity extends AppCompatActivity {
 
 
         //start from this is to create the horizontal recycler viewer
-         mList1 = findViewById(R.id.list1);
-         // mList2 = findViewById(R.id.list2);
-         appList = new ArrayList<>();
+        mList1 = findViewById(R.id.list1);
+        // mList2 = findViewById(R.id.list2);
+        appList = new ArrayList<>();
 
-         appList.add(new App(R.drawable.youtube, "Youtube", 40));
-         appList.add(new App(R.drawable.maxplayer, "Max Player", 30));
-         appList.add(new App(R.drawable.messenger, "Messenger", 20));
-         appList.add(new App(R.drawable.twitter, "Twitter", 22));
-         appList.add(new App(R.drawable.vlc, "VLC Player", 40));
-         appList.add(new App(R.drawable.whatsapp, "Whatsapp", 34));
+        appList.add(new App(R.drawable.youtube, "Youtube", 40));
+        appList.add(new App(R.drawable.maxplayer, "Max Player", 30));
+        appList.add(new App(R.drawable.messenger, "Messenger", 20));
+        appList.add(new App(R.drawable.twitter, "Twitter", 22));
+        appList.add(new App(R.drawable.vlc, "VLC Player", 40));
+        appList.add(new App(R.drawable.whatsapp, "Whatsapp", 34));
 
-         LinearLayoutManager manager1 = new LinearLayoutManager(this);
-         manager1.setOrientation(LinearLayoutManager.HORIZONTAL);
-         mList1.setLayoutManager(manager1);
+        LinearLayoutManager manager1 = new LinearLayoutManager(this);
+        manager1.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mList1.setLayoutManager(manager1);
 
 
 /**
@@ -85,13 +85,14 @@ public class MainActivity extends AppCompatActivity {
         //To click the menu icon
 
 
- final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+        final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
 
- findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
-@Override public void onClick(View v) {
-drawerLayout.openDrawer(GravityCompat.START);
-}
-});
+        findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
         /**
          //to view with fragment
@@ -101,6 +102,9 @@ drawerLayout.openDrawer(GravityCompat.START);
          NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
          NavigationUI.setupWithNavController(navigationView, navController);
          */
+
+
+        //Bottom navigation actions
         BottomNavigationView bottomnav = findViewById(R.id.bottom_navigation);
         bottomnav.setSelectedItemId(R.id.home_main);
         bottomnav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -110,7 +114,7 @@ drawerLayout.openDrawer(GravityCompat.START);
                     case R.id.order_list:
                         startActivity(new Intent(getApplicationContext()
                                 , OrderListView.class));
-                        overridePendingTransition(0, 0);
+                        overridePendingTransition(3, 3);
                         return true;
                     case R.id.home_main:
                         return true;
@@ -118,15 +122,39 @@ drawerLayout.openDrawer(GravityCompat.START);
                 return false;
             }
         });
+
+        NavigationView navigationView;
+        navigationView = (NavigationView) findViewById(R.id.navigationMenu);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id= item.getItemId();
+                if(item.isChecked()){
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    return false;
+                }
+                if(id == R.id.menuNotification){
+                    startActivity(new Intent(getApplicationContext(),NotificationCore.class));
+                }
+                else if(id == R.id.menuOrder){
+                    startActivity(new Intent(getApplicationContext(),OrderCore.class));
+                }
+                else if(id == R.id.menuInbox){
+                    startActivity(new Intent(getApplicationContext(),InboxCore.class));
+                }
+                else if(id == R.id.menuInfo){
+                    startActivity(new Intent(getApplicationContext(),InformationCore.class));
+                }
+                else if(id == R.id.menuHome){
+                    return false;
+                }
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
     }
 
 
-    //for sliding the menu drawer
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }
 
     //sample for menu with three dots
     /**
