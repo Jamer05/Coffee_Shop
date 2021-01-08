@@ -3,12 +3,12 @@ package com.java.mahbixver20;
 public class App {
     int image;
     String name;
-    int size;
+    float prize;
 
-    public App(int image, String name, int size) {
+    public App(int image, String name, float prize) {
         this.image = image;
         this.name = name;
-        this.size = size;
+        this.prize = prize;
     }
 
     public int getImage() {
@@ -19,7 +19,7 @@ public class App {
         return name;
     }
 
-    public int getSize() {
-        return size;
+    public float getSize() {
+        return prize;
     }
 }

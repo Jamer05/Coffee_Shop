@@ -42,25 +42,6 @@
                 android:textColorHint="@color/design_default_color_primary"
                 android:textSize="18dp"
                 android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:contentDescription="@string/todo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_backpack" />
-
-            <TextView
-                android:id="@+id/num_of_items_in_cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                android:text="0"
-                android:textColor="#FF0000"
-                android:textSize="18sp"
-                android:textStyle="bold" />
         </LinearLayout>
 
         <TextView
@@ -71,6 +52,7 @@
             android:textSize="30sp" />
 
     </RelativeLayout>
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigationMenu"
         android:layout_width="wrap_content"

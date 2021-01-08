@@ -15,18 +15,17 @@ import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class InformationCore extends AppCompatActivity {
+public class BagOrder extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_information_core);
-
+        setContentView(R.layout.activity_bag_order);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        getWindow().setStatusBarColor(ContextCompat.getColor(InformationCore.this, R.color.colorPrimary));
+        getWindow().setStatusBarColor(ContextCompat.getColor(BagOrder.this, R.color.colorPrimary));
         final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout2);
 
         findViewById(R.id.imageMenu2).setOnClickListener(new View.OnClickListener() {
@@ -52,7 +51,7 @@ public class InformationCore extends AppCompatActivity {
                 } else if (id == R.id.menuInbox) {
                     startActivity(new Intent(getApplicationContext(), InboxCore.class));
                 } else if (id == R.id.menuInfo) {
-                    return false;
+                    startActivity(new Intent(getApplicationContext(), InformationCore.class));
                 } else if (id == R.id.menuHome) {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }

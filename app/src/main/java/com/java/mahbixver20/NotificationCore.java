@@ -1,18 +1,19 @@
 package com.java.mahbixver20;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+        import androidx.annotation.NonNull;
+        import androidx.appcompat.app.ActionBar;
+        import androidx.appcompat.app.AppCompatActivity;
+        import androidx.core.content.ContextCompat;
+        import androidx.core.view.GravityCompat;
+        import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.os.Handler;
+        import android.view.MenuItem;
+        import android.view.View;
 
-import com.google.android.material.navigation.NavigationView;
+        import com.google.android.material.navigation.NavigationView;
 
 public class NotificationCore extends AppCompatActivity {
 
@@ -59,5 +60,22 @@ public class NotificationCore extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    boolean singleBack = false;
+
+    @Override
+    public void onBackPressed() {
+        if(singleBack) {
+            super.onBackPressed();
+            return;
+        }
+        this.singleBack = true;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                singleBack = false;
+            }
+        },2000);
     }
 }

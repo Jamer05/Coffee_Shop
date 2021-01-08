@@ -9,12 +9,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 
 public class OrderListView extends AppCompatActivity {
 
@@ -54,6 +56,48 @@ public class OrderListView extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+        NavigationView navigationView;
+        navigationView = (NavigationView) findViewById(R.id.navigationMenu);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                if (item.isChecked()) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    return false;
+                }
+                if (id == R.id.menuNotification) {
+                    startActivity(new Intent(getApplicationContext(), NotificationCore.class));
+                } else if (id == R.id.menuOrder) {
+                    startActivity(new Intent(getApplicationContext(), OrderCore.class));
+                } else if (id == R.id.menuInbox) {
+                    startActivity(new Intent(getApplicationContext(), InboxCore.class));
+                } else if (id == R.id.menuInfo) {
+                    startActivity(new Intent(getApplicationContext(), InformationCore.class));
+                } else if (id == R.id.menuHome) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
+    }
+
+    boolean singleBack = false;
+
+    @Override
+    public void onBackPressed() {
+        if (singleBack) {
+            super.onBackPressed();
+            return;
+        }
+        this.singleBack = true;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                singleBack = false;
+            }
+        }, 2000);
     }
 
 }

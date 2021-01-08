@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -58,5 +59,22 @@ public class InboxCore extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    boolean singleBack = false;
+
+    @Override
+    public void onBackPressed() {
+        if(singleBack) {
+            super.onBackPressed();
+            return;
+        }
+        this.singleBack = true;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                singleBack = false;
+            }
+        },2000);
     }
 }

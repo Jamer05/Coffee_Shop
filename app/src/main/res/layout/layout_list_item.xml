@@ -5,7 +5,8 @@
     android:layout_width="100dp"
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/items">
 
     <ImageView
         android:id="@+id/image"
@@ -29,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="38 MB"
+        android:text="₱"
         android:textSize="16sp" />
 
 
