@@ -13,4 +13,7 @@
     <string name="previously_installed_apps">Previously Installed Apps</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="Reserve">Reserve</string>
+    <string name="Order">Order</string>
+    <string name="Proceed">Proceed</string>
 </resources>

@@ -9,9 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BagOrder">
-
-        </activity>
+        <activity android:name=".BillingOrders"></activity>
+        <activity android:name=".BagOrder" />
         <activity android:name=".InformationCore" />
         <activity android:name=".InboxCore" />
         <activity android:name=".OrderCore" />

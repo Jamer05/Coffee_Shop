@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginLeft="20dip"
+    android:layout_marginRight="20dip"
+    android:background="@drawable/relative_border_radius"
+    android:id="@+id/acf"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/coffe_selected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:text="Coffee"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/prize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prize"
+            android:textColor="#C0C0C0"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/proceed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/button_design"
+            android:text="@string/Proceed"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/add_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/button_design"
+            android:text="@string/Order"
+            android:textColor="#FFFFFF"
+
+            />
+
+        <Button
+            android:id="@+id/reserve"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/button_design"
+            android:text="@string/Reserve"
+            android:textColor="#FFFFFF" />
+
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/exit"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="250dp"
+        android:src="@drawable/ic_baseline_close_24" />
+    <ImageView
+        android:id="@+id/coffee_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:src="@drawable/coffee1" />
+</RelativeLayout>

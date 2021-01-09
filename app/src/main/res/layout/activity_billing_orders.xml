@@ -5,7 +5,7 @@
     android:id="@+id/drawerLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BagOrder">
+    tools:context=".NotificationCore">
 
 
     <RelativeLayout
@@ -13,13 +13,6 @@
         android:layout_height="match_parent"
         android:background="#fff"
         android:orientation="vertical">
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            android:layout_alignParentBottom="true"/>
 
         <LinearLayout
             android:id="@+id/layoutToolBar"
@@ -49,17 +42,42 @@
                 android:textColorHint="@color/design_default_color_primary"
                 android:textSize="18dp"
                 android:textStyle="bold" />
-
         </LinearLayout>
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_order"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
-            android:layout_marginBottom="100dp"/>
+            android:layout_centerInParent="true"
+            android:text="Billing Orders"
+            android:textSize="30sp" />
 
+        <Button
+            android:id="@+id/cancel_order"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="225dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/search_bg"
+            android:text="Cancel"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <Button
+            android:id="@+id/pay_order"
+            android:layout_width="163dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="27dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="35dp"
+            android:background="@drawable/search_bg"
+            android:text="Pay Order"
+            android:textColor="@color/colorPrimaryDark" />
     </RelativeLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -68,7 +86,5 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:headerLayout="@layout/header"
-        app:menu="@menu/nav_menu" >
-
-    </com.google.android.material.navigation.NavigationView>
+        app:menu="@menu/nav_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>
