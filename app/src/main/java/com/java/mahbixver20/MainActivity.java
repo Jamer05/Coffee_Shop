@@ -13,9 +13,11 @@ import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,13 +39,14 @@ import java.util.ArrayList;
  * Email: jamerkelly09877@gmail.com
  * @version 2.0.1
  * @since 03/01/2021
- *
  */
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
     private RecyclerView mList1;
     private ArrayList<App> appList;
     private CustomAdaptor adapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    Button click;
+    TextView numOfReserve;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +61,32 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(myIntent);
             }
         });
+
+        click = (Button) findViewById(R.id.click_me);
+        click.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                numOfReserve = (TextView) findViewById(R.id.num_of_items_in_cart);
+                String bagItems = numOfReserve.getText().toString();
+                int startCount = Integer.parseInt(bagItems);
+                startCount++;
+                numOfReserve.setText(startCount + "");
+
+            }
+        });
+
+
         appList = new ArrayList<>();
 
         //start from this is to create the horizontal recycler viewer
         mList1 = findViewById(R.id.list1);
-        appList.add(new App(R.drawable.youtube, "Youtube", (float) 40.00));
-        appList.add(new App(R.drawable.maxplayer, "Max Player", (float) 50.00));
-        appList.add(new App(R.drawable.messenger, "Messenger", (float) 60.00));
-        appList.add(new App(R.drawable.twitter, "Twitter", (float) 70.00));
-        appList.add(new App(R.drawable.vlc, "VLC Player", (float) 80.00));
-        appList.add(new App(R.drawable.whatsapp, "Whatsapp", (float) 90.00));
+        appList.add(new App(R.drawable.youtube, "Youtube", 40));
+        appList.add(new App(R.drawable.maxplayer, "Max Player", 40));
+        appList.add(new App(R.drawable.messenger, "Messenger", 23));
+        appList.add(new App(R.drawable.twitter, "Twitter", 400));
+        appList.add(new App(R.drawable.vlc, "VLC Player",  3200));
+        appList.add(new App(R.drawable.whatsapp, "Whatsapp", 2131));
 
         LinearLayoutManager manager1 = new LinearLayoutManager(this);
         manager1.setOrientation(LinearLayoutManager.HORIZONTAL);

@@ -39,8 +39,7 @@ public class BagOrder extends AppCompatActivity {
         btnInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ;
-                int position = 1;
+                int position=0;
                 insertItem(position);
             }
         });
@@ -83,7 +82,7 @@ public class BagOrder extends AppCompatActivity {
     }
 
     public void insertItem(int position) {
-        appList1.add(position, new App(R.drawable.youtube, "Youtube" + position, (float) 40.00));
+        appList1.add(position, new App(R.drawable.youtube, "Youtube" + position, 40));
         adapter.notifyItemInserted(position);
     }
 
@@ -91,12 +90,6 @@ public class BagOrder extends AppCompatActivity {
         appList1 = new ArrayList<>();
         mList1 = findViewById(R.id.list_order);
 
-        appList1.add(new App(R.drawable.youtube, "Youtube", (float) 40.00));
-        appList1.add(new App(R.drawable.maxplayer, "Max Player", (float) 50.00));
-        appList1.add(new App(R.drawable.messenger, "Messenger", (float) 60.00));
-        appList1.add(new App(R.drawable.twitter, "Twitter", (float) 70.00));
-        appList1.add(new App(R.drawable.vlc, "VLC Player", (float) 80.00));
-        appList1.add(new App(R.drawable.whatsapp, "Whatsapp", (float) 90.00));
     }
 
     private void createItem() {

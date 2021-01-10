@@ -3,9 +3,9 @@ package com.java.mahbixver20;
 public class App {
     int image;
     String name;
-    float prize;
+    int prize;
 
-    public App(int image, String name, float prize) {
+    public App(int image, String name, int prize) {
         this.image = image;
         this.name = name;
         this.prize = prize;
@@ -19,7 +19,7 @@ public class App {
         return name;
     }
 
-    public float getSize() {
+    public int getSize() {
         return prize;
     }
 }

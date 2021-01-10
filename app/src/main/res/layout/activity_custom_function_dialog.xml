@@ -8,7 +8,6 @@
     android:layout_marginLeft="20dip"
     android:layout_marginRight="20dip"
     android:background="@drawable/relative_border_radius"
-    android:id="@+id/acf"
     >
 
     <LinearLayout
