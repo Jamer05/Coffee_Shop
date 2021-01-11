@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     private CustomAdapter adapter;
     private RecyclerView.LayoutManager mLayoutManager;
     Button click;
-    TextView numOfReserve;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +55,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
-
+    /*
         click = (Button) findViewById(R.id.click_me);
         click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                numOfReserve = (TextView) findViewById(R.id.num_of_items_in_cart);
+                TextView numOfReserve = (TextView) findViewById(R.id.num_of_items_in_cart);
                 String bagItems = numOfReserve.getText().toString();
                 int startCount = Integer.parseInt(bagItems);
                 startCount++;
@@ -70,7 +69,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        */
 
+        //TODO: STARTS HERE
+
+        TextView numOfReserve = (TextView) findViewById(R.id.num_of_items_in_cart);
 
         appList = new ArrayList<>();
 
@@ -80,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         appList.add(new App(R.drawable.maxplayer, "Max Player", 40));
         appList.add(new App(R.drawable.messenger, "Messenger", 23));
         appList.add(new App(R.drawable.twitter, "Twitter", 400));
-        appList.add(new App(R.drawable.vlc, "VLC Player",  3200));
+        appList.add(new App(R.drawable.vlc, "VLC Player", 3200));
         appList.add(new App(R.drawable.whatsapp, "Whatsapp", 2131));
 
         LinearLayoutManager manager1 = new LinearLayoutManager(this);
