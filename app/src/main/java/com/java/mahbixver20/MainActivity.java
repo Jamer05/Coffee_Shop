@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayoutManager manager1 = new LinearLayoutManager(this);
         manager1.setOrientation(LinearLayoutManager.HORIZONTAL);
         mList1.setLayoutManager(manager1);
-        adapter = new CustomAdapter(this, appList);
+        adapter = new CustomAdapter(this, numOfReserve, appList);
         mList1.setAdapter(adapter);
 
         //hiding actionbar panel
