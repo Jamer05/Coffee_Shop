@@ -32,9 +32,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     BagAdapter adapter;
 
 
-    public CustomAdapter(Context context, ArrayList<App> apps) {
+    public CustomAdapter(Context context, Textview numReserveTxtVw, ArrayList<App> apps) {
         this.context = context;
         this.apps = apps;
+        numOfReserve=numReserveTxtVw;
     }
 
 
@@ -70,7 +71,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {//starts the bug here
-                numOfReserve = (TextView) myDialog.findViewById(R.id.num_of_items_in_cart);
+     
                 @SuppressLint("CutPasteId") Button qtyOrder = myDialog.findViewById(R.id.reserve);
                 qtyOrder.setOnClickListener(new View.OnClickListener() {
                     @SuppressLint("SetTextI18n")
