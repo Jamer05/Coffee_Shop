@@ -1,17 +1,15 @@
 package com.java.mahbixver20;
 
 
-import android.app.AlertDialog;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,23 +19,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.w3c.dom.Text;
-
+import java.net.BindException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHolder> {
+public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     Dialog myDialog;
-    View view;
-    int startCount = 0;
     private Context context;
     private ArrayList<App> appList1;
     private List<App> apps;
-    TextView numOfReserve;
+    TextView numOfReserve = null;
     BagAdapter adapter;
 
 
-    public CustomAdaptor(Context context, ArrayList<App> apps) {
+    public CustomAdapter(Context context, ArrayList<App> apps) {
         this.context = context;
         this.apps = apps;
     }
@@ -60,7 +55,7 @@ public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHold
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, final int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.layout_list_item, parent, false);
         final MyViewHolder vHolder = new MyViewHolder(v);
         myDialog = new Dialog(context);
@@ -69,23 +64,25 @@ public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHold
         vHolder.itemView.setOnClickListener(new View.OnClickListener() {
             /**
              * This part sir below in  this area this code cause some error of "NullPointerException attemp to invoke virtual method"
-             * @param
+             * @param v
              */
 
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View v) {//starts the bug here
                 numOfReserve = (TextView) myDialog.findViewById(R.id.num_of_items_in_cart);
-                Button qtyOrder = myDialog.findViewById(R.id.reserve);
+                @SuppressLint("CutPasteId") Button qtyOrder = myDialog.findViewById(R.id.reserve);
                 qtyOrder.setOnClickListener(new View.OnClickListener() {
+                    @SuppressLint("SetTextI18n")
                     @Override
                     public void onClick(View v) {
                         try {
                             String bagItems = numOfReserve.getText().toString();
-                            int startCount = Integer.parseInt(bagItems);
+                            int startCount = Integer.parseInt((bagItems));
                             startCount++;
-                            numOfReserve.setText(""+startCount);
-                        } catch (Exception e) {
-                            Toast.makeText(context, "Added to Bag " + e.toString(), Toast.LENGTH_LONG).show();
+                            numOfReserve.setText("" + startCount);
+                        } catch (NullPointerException e) {
+                            Toast.makeText(context, "Added to Bag " + e.toString(), Toast.LENGTH_SHORT).show();
                             myDialog.dismiss();
                         }
                     }
@@ -96,13 +93,12 @@ public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHold
                 TextView dialog_prize = (TextView) myDialog.findViewById(R.id.prize);
                 ImageView exit = (ImageView) myDialog.findViewById(R.id.exit);
                 ImageView dialog_image = (ImageView) myDialog.findViewById(R.id.coffee_image);
-                dialog_prize.setText("₱"+Integer.toString(apps.get(vHolder.getAdapterPosition()).getSize()));
+                dialog_prize.setText("₱" + apps.get(vHolder.getAdapterPosition()).getSize());
                 dialog_name.setText(apps.get(vHolder.getAdapterPosition()).getName());
                 dialog_image.setImageResource(apps.get(vHolder.getAdapterPosition()).getImage());
                 myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 Button btn = myDialog.findViewById(R.id.proceed);
                 Button btnInsert = (Button) myDialog.findViewById(R.id.reserve);
-
 
                 exit.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -125,7 +121,6 @@ public class CustomAdaptor extends RecyclerView.Adapter<CustomAdaptor.MyViewHold
 
         });
         return vHolder;
-
     }
 
     public void insertItem(int position) {

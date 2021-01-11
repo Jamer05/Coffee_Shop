@@ -33,7 +33,7 @@
 
             <TextView
                 android:id="@+id/textTitle"
-                android:layout_width="280dp"
+                android:layout_width="289dp"
                 android:layout_height="match_parent"
                 android:layout_margin="15dp"
                 android:fontFamily="@font/roboto_slab_bold"
@@ -41,16 +41,6 @@
                 android:textColorHint="@color/design_default_color_primary"
                 android:textSize="18dp"
                 android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/back_pack"
-                android:layout_width="20dp"
-                android:layout_height="30dp"
-                android:layout_marginBottom="5dp"
-                android:contentDescription="@string/todo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_backpack" />
 
             <TextView
                 android:id="@+id/num_of_items_in_cart"
@@ -61,6 +51,15 @@
                 android:textColor="#FF0000"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/back_pack"
+                android:layout_width="16dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="5dp"
+                android:contentDescription="@string/todo"
+                app:srcCompat="@drawable/ic_backpack" />
+
         </LinearLayout>
 
         <Button
@@ -95,6 +94,7 @@
             android:textColor="#000"
             android:textSize="20sp"
             android:textStyle="bold" />
+
 
 
         <androidx.recyclerview.widget.RecyclerView
