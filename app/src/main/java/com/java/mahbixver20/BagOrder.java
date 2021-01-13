@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 
 public class BagOrder extends AppCompatActivity {
     private RecyclerView mList1;
-    private ArrayList<App> appList1;
+    private ArrayList<PopularCoffee> appList1;
     private BagAdapter adapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Button btnInsert;
@@ -82,7 +81,7 @@ public class BagOrder extends AppCompatActivity {
     }
 
     public void insertItem(int position) {
-        appList1.add(position, new App(R.drawable.youtube, "Youtube" + position, 40));
+        appList1.add(position, new PopularCoffee(R.drawable.youtube, "Youtube" + position, 40));
         adapter.notifyItemInserted(position);
     }
 

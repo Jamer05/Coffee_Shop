@@ -19,20 +19,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.net.BindException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     Dialog myDialog;
     private Context context;
-    private ArrayList<App> appList1;
-    private List<App> apps;
+    private ArrayList<PopularCoffee> appList1;
+    private List<PopularCoffee> apps;
     TextView numOfReserve = null;
     BagAdapter adapter;
 
 
-    public CustomAdapter(Context context, Textview numReserveTxtVw, ArrayList<App> apps) {
+    public CustomAdapter(Context context, TextView numReserveTxtVw, ArrayList<PopularCoffee> apps) {
         this.context = context;
         this.apps = apps;
         numOfReserve=numReserveTxtVw;
@@ -77,15 +76,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onClick(View v) {
-                        try {
                             String bagItems = numOfReserve.getText().toString();
                             int startCount = Integer.parseInt((bagItems));
                             startCount++;
                             numOfReserve.setText("" + startCount);
-                        } catch (NullPointerException e) {
-                            Toast.makeText(context, "Added to Bag " + e.toString(), Toast.LENGTH_SHORT).show();
                             myDialog.dismiss();
-                        }
+                            Toast.makeText(context, "Added to Bag ", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -125,14 +121,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     }
 
     public void insertItem(int position) {
-        appList1.add(position, new App(R.drawable.youtube, "Youtube" + position, (int) 40.00));
+        appList1.add(position, new PopularCoffee(R.drawable.youtube, "Youtube" + position, (int) 40.00));
         adapter.notifyItemInserted(position);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-        App app = apps.get(position);
+        PopularCoffee app = apps.get(position);
         holder.mName.setText(app.getName());
         holder.mSize.setText("₱" + app.getSize());
         holder.mImage.setImageResource(app.getImage());
@@ -155,9 +151,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         }
     }
 
-    public void filterList(ArrayList<App> filteredList) {
+    public void filterList(ArrayList<PopularCoffee> filteredList) {
         this.apps = filteredList;
         notifyDataSetChanged();
     }
-
 }

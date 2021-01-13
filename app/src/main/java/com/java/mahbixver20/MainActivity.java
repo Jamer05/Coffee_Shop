@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Hemerson G. Ramiro Jr.
@@ -37,15 +39,43 @@ import java.util.ArrayList;
  */
 public class MainActivity extends AppCompatActivity {
     private RecyclerView mList1;
-    private ArrayList<App> appList;
+    private ArrayList<PopularCoffee> appList;
     private CustomAdapter adapter;
+    private RecyclerView grid;
+    private GridRecycler gridAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    Button click;
+    private ArrayList<SuggestedCoffee> gridCoffee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        gridCoffee = new ArrayList<>();
+        grid = findViewById(R.id.grid_recycler_view);
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("WhatsApp", "BlackCoffee", 40, R.drawable.whatsapp));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+        gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
+
+        TextView coffeeItem = (TextView) findViewById(R.id.coffee_name);
+        gridAdapter = new GridRecycler(this,coffeeItem,gridCoffee);
+        grid.setLayoutManager(new GridLayoutManager(this, 3));
+        grid.setAdapter(gridAdapter);
+
         ImageView imgview = (ImageView) findViewById(R.id.back_pack);
         imgview.bringToFront();
         imgview.setOnClickListener(new View.OnClickListener() {
@@ -55,41 +85,27 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(myIntent);
             }
         });
-    /*
-        click = (Button) findViewById(R.id.click_me);
-        click.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                TextView numOfReserve = (TextView) findViewById(R.id.num_of_items_in_cart);
-                String bagItems = numOfReserve.getText().toString();
-                int startCount = Integer.parseInt(bagItems);
-                startCount++;
-                numOfReserve.setText(startCount + "");
-
-            }
-        });
-        */
 
         //TODO: STARTS HERE
-
+        //Starting count For bag
         TextView numOfReserve = (TextView) findViewById(R.id.num_of_items_in_cart);
 
         appList = new ArrayList<>();
 
         //start from this is to create the horizontal recycler viewer
         mList1 = findViewById(R.id.list1);
-        appList.add(new App(R.drawable.youtube, "Youtube", 40));
-        appList.add(new App(R.drawable.maxplayer, "Max Player", 40));
-        appList.add(new App(R.drawable.messenger, "Messenger", 23));
-        appList.add(new App(R.drawable.twitter, "Twitter", 400));
-        appList.add(new App(R.drawable.vlc, "VLC Player", 3200));
-        appList.add(new App(R.drawable.whatsapp, "Whatsapp", 2131));
+        appList.add(new PopularCoffee(R.drawable.youtube, "Youtube", 40));
+        appList.add(new PopularCoffee(R.drawable.maxplayer, "Max Player", 40));
+        appList.add(new PopularCoffee(R.drawable.messenger, "Messenger", 23));
+        appList.add(new PopularCoffee(R.drawable.twitter, "Twitter", 400));
+        appList.add(new PopularCoffee(R.drawable.vlc, "VLC Player", 3200));
+        appList.add(new PopularCoffee(R.drawable.whatsapp, "Whatsapp", 2131));
 
         LinearLayoutManager manager1 = new LinearLayoutManager(this);
         manager1.setOrientation(LinearLayoutManager.HORIZONTAL);
         mList1.setLayoutManager(manager1);
         adapter = new CustomAdapter(this, numOfReserve, appList);
+
         mList1.setAdapter(adapter);
 
         //hiding actionbar panel
@@ -110,15 +126,6 @@ public class MainActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
-
-        /*
-         //to view with fragment
-         NavigationView navigationView = findViewById(R.id.navigationMenu);
-         navigationView.setItemIconTintList(null);
-
-         NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
-         NavigationUI.setupWithNavController(navigationView, navController);
-         */
 
         //Bottom navigation actions
         BottomNavigationView bottomnav = findViewById(R.id.bottom_navigation);
@@ -178,18 +185,29 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+                filter1(s.toString());
                 filter(s.toString());
             }
         });
     }
 
     private void filter(String text) {
-        ArrayList<App> filteredList = new ArrayList<>();
-        for (App item : appList) {
+        ArrayList<PopularCoffee> filteredList = new ArrayList<>();
+        for (PopularCoffee item : appList) {
             if (item.getName().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
         }
         adapter.filterList(filteredList);
+    }
+
+    private void filter1(String text) {
+        ArrayList<SuggestedCoffee> filteredList1 = new ArrayList<>();
+        for (SuggestedCoffee item : gridCoffee) {
+            if (item.getTitle().toLowerCase().contains(text.toLowerCase())) {
+                filteredList1.add(item);
+            }
+        }
+        gridAdapter.filterList1(filteredList1);
     }
 }

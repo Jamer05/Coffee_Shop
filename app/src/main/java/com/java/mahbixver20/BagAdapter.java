@@ -14,9 +14,9 @@ import java.util.ArrayList;
 
 public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder1> {
     private Context context;
-    private ArrayList<App> apps;
+    private ArrayList<PopularCoffee> apps;
 
-    public BagAdapter(Context context, ArrayList<App> apps) {
+    public BagAdapter(Context context, ArrayList<PopularCoffee> apps) {
         this.context = context;
         this.apps = apps;
     }
@@ -46,7 +46,7 @@ public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder1> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder1 holder, int position) {
-        App app = apps.get(position);
+        PopularCoffee app = apps.get(position);
         holder.mName.setText(app.getName());
         holder.mSize.setText("₱" + app.getSize());
         holder.mImage.setImageResource(app.getImage());

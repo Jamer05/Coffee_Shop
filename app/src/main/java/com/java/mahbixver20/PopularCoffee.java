@@ -1,11 +1,11 @@
 package com.java.mahbixver20;
 
-public class App {
+public class PopularCoffee {
     int image;
     String name;
     int prize;
 
-    public App(int image, String name, int prize) {
+    public PopularCoffee(int image, String name, int prize) {
         this.image = image;
         this.name = name;
         this.prize = prize;

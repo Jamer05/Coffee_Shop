@@ -13,7 +13,7 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     RecyclerView mList1, mList2;
-    List<App> appList;
+    List<PopularCoffee> appList;
 
     @Nullable
     @Override
