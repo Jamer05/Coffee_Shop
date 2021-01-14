@@ -9,11 +9,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,10 +25,11 @@ import java.util.ArrayList;
 
 public class BagOrder extends AppCompatActivity {
     private RecyclerView mList1;
-    private ArrayList<PopularCoffee> appList1;
+    private ArrayList<PopularCoffeeData> appList1 = new ArrayList<>();
     private BagAdapter adapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Button btnInsert;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,18 +37,35 @@ public class BagOrder extends AppCompatActivity {
         setContentView(R.layout.activity_bag_order);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
-        buildRecycleView();
-        createItem();
-        btnInsert = findViewById(R.id.button);
-        btnInsert.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int position=0;
-                insertItem(position);
-            }
-        });
+        TextView itmName = (TextView) findViewById(R.id.name_item);
+        TextView prize = (TextView) findViewById(R.id.prize_item);
+        ImageView image = (ImageView)findViewById(R.id.list_item_coffee);
+        mList1 = findViewById(R.id.list_order);
+
+        LinearLayoutManager manager1 = new LinearLayoutManager(this);
+        manager1.setOrientation(LinearLayoutManager.VERTICAL);
+        mList1.setLayoutManager(manager1);
+
+        adapter = new BagAdapter(this, itmName,prize,appList1);
+        mList1.setAdapter(adapter);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(ContextCompat.getColor(BagOrder.this, R.color.colorPrimary));
+
+        //TODO: STARTS HERE
+        /**
+         * The cursor below is the targeting error
+         */
+
+
+        Cursor cursor = new DBManager(this).readAllData();
+        while (cursor.moveToNext()) {
+
+            //This is the error sir
+            //TODO:         Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'boolean java.util.ArrayList.add(java.lang.Object)' on a null object reference
+            PopularCoffeeData obj = new PopularCoffeeData(cursor.getString(1), cursor.getString(2));
+            appList1.add(obj);
+        }
+        //****************************************************************************************************************************************
 
         final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout2);
 
@@ -78,24 +100,5 @@ public class BagOrder extends AppCompatActivity {
                 return true;
             }
         });
-    }
-
-    public void insertItem(int position) {
-        appList1.add(position, new PopularCoffee(R.drawable.youtube, "Youtube" + position, 40));
-        adapter.notifyItemInserted(position);
-    }
-
-    private void buildRecycleView() {
-        appList1 = new ArrayList<>();
-        mList1 = findViewById(R.id.list_order);
-
-    }
-
-    private void createItem() {
-        LinearLayoutManager manager1 = new LinearLayoutManager(this);
-        manager1.setOrientation(LinearLayoutManager.VERTICAL);
-        mList1.setLayoutManager(manager1);
-        adapter = new BagAdapter(this, appList1);
-        mList1.setAdapter(adapter);
     }
 }

@@ -1,6 +1,7 @@
 package com.java.mahbixver20;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +11,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder1> {
     private Context context;
-    private ArrayList<PopularCoffee> apps;
-
-    public BagAdapter(Context context, ArrayList<PopularCoffee> apps) {
+    private ArrayList<PopularCoffeeData> apps;
+    TextView txt1 = null;
+    TextView txt2 = null;
+    public BagAdapter(Context context, TextView txt1, TextView txt2,ArrayList<PopularCoffeeData> apps) {
         this.context = context;
         this.apps = apps;
+        this.txt1=txt1;
+        this.txt2=txt2;
+
     }
 
 
@@ -33,7 +40,6 @@ public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder1> {
 
             mName = itemView.findViewById(R.id.name_item);
             mSize = itemView.findViewById(R.id.prize_item);
-            mImage = itemView.findViewById(R.id.list_item_coffee);
         }
     }
 
@@ -46,10 +52,9 @@ public class BagAdapter extends RecyclerView.Adapter<BagAdapter.MyViewHolder1> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder1 holder, int position) {
-        PopularCoffee app = apps.get(position);
+        PopularCoffeeData app = apps.get(position);
         holder.mName.setText(app.getName());
-        holder.mSize.setText("₱" + app.getSize());
-        holder.mImage.setImageResource(app.getImage());
+        holder.mSize.setText(app.getSize());
     }
 
 

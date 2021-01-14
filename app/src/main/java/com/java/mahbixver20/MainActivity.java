@@ -4,7 +4,9 @@
 
 package com.java.mahbixver20;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -72,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         gridCoffee.add(new SuggestedCoffee("Messenger", "BlackCoffee", 40, R.drawable.messenger));
 
         TextView coffeeItem = (TextView) findViewById(R.id.coffee_name);
-        gridAdapter = new GridRecycler(this,coffeeItem,gridCoffee);
+        gridAdapter = new GridRecycler(this, coffeeItem, gridCoffee);
         grid.setLayoutManager(new GridLayoutManager(this, 3));
         grid.setAdapter(gridAdapter);
 
@@ -86,25 +89,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //TODO: STARTS HERE
         //Starting count For bag
         TextView numOfReserve = (TextView) findViewById(R.id.num_of_items_in_cart);
-
+        ImageView imageView = (ImageView)findViewById(R.id.list_item_coffee);
         appList = new ArrayList<>();
 
         //start from this is to create the horizontal recycler viewer
         mList1 = findViewById(R.id.list1);
-        appList.add(new PopularCoffee(R.drawable.youtube, "Youtube", 40));
-        appList.add(new PopularCoffee(R.drawable.maxplayer, "Max Player", 40));
-        appList.add(new PopularCoffee(R.drawable.messenger, "Messenger", 23));
-        appList.add(new PopularCoffee(R.drawable.twitter, "Twitter", 400));
-        appList.add(new PopularCoffee(R.drawable.vlc, "VLC Player", 3200));
-        appList.add(new PopularCoffee(R.drawable.whatsapp, "Whatsapp", 2131));
+        appList.add(new PopularCoffee(R.drawable.youtube, "Youtube", "40"));
+        appList.add(new PopularCoffee(R.drawable.maxplayer, "Max Player", "40"));
+        appList.add(new PopularCoffee(R.drawable.messenger, "Messenger", "23"));
+        appList.add(new PopularCoffee(R.drawable.twitter, "Twitter", "400"));
+        appList.add(new PopularCoffee(R.drawable.vlc, "VLC Player", "3200"));
+        appList.add(new PopularCoffee(R.drawable.whatsapp, "Whatsapp", "2131"));
 
         LinearLayoutManager manager1 = new LinearLayoutManager(this);
         manager1.setOrientation(LinearLayoutManager.HORIZONTAL);
         mList1.setLayoutManager(manager1);
-        adapter = new CustomAdapter(this, numOfReserve, appList);
+        adapter = new CustomAdapter(this,imageView, numOfReserve, appList);
 
         mList1.setAdapter(adapter);
 
@@ -210,4 +212,31 @@ public class MainActivity extends AppCompatActivity {
         }
         gridAdapter.filterList1(filteredList1);
     }
+
+    @Override
+    public void onBackPressed() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Really Exit?")
+                .setMessage("Are you sure you want to exit?")
+                .setNegativeButton(android.R.string.no, null)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        MainActivity.super.onBackPressed();
+                        quit();
+                        System.exit(0);
+                    }
+                }).create().show();
+    }
+
+
+    public void quit() {
+        Intent start = new Intent(Intent.ACTION_MAIN);
+        start.addCategory(Intent.CATEGORY_HOME);
+        start.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        start.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(start);
+    }
 }
+

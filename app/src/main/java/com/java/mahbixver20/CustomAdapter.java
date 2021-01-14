@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +30,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private List<PopularCoffee> apps;
     TextView numOfReserve = null;
     BagAdapter adapter;
+    ImageView imageView =null;
 
-
-    public CustomAdapter(Context context, TextView numReserveTxtVw, ArrayList<PopularCoffee> apps) {
+    public CustomAdapter(Context context, ImageView imageView,TextView numReserveTxtVw, ArrayList<PopularCoffee> apps) {
         this.context = context;
         this.apps = apps;
-        numOfReserve=numReserveTxtVw;
+        numOfReserve = numReserveTxtVw;
+        this.imageView= imageView;
     }
 
 
@@ -60,7 +62,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         final MyViewHolder vHolder = new MyViewHolder(v);
         myDialog = new Dialog(context);
         myDialog.setContentView(R.layout.activity_custom_function_dialog);
-
+        final ImageView image = (ImageView) myDialog.findViewById(R.id.list_item_coffee);
         vHolder.itemView.setOnClickListener(new View.OnClickListener() {
             /**
              * This part sir below in  this area this code cause some error of "NullPointerException attemp to invoke virtual method"
@@ -69,38 +71,46 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
             @SuppressLint("SetTextI18n")
             @Override
-            public void onClick(View v) {//starts the bug here
-     
-                @SuppressLint("CutPasteId") Button qtyOrder = myDialog.findViewById(R.id.reserve);
-                qtyOrder.setOnClickListener(new View.OnClickListener() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void onClick(View v) {
-                            String bagItems = numOfReserve.getText().toString();
-                            int startCount = Integer.parseInt((bagItems));
-                            startCount++;
-                            numOfReserve.setText("" + startCount);
-                            myDialog.dismiss();
-                            Toast.makeText(context, "Added to Bag ", Toast.LENGTH_SHORT).show();
-                    }
-                });
+            public void onClick(View v) {
 
+                Button reserve = myDialog.findViewById(R.id.reserve);
                 v.setBackgroundResource(android.R.color.transparent);
-                TextView dialog_name = (TextView) myDialog.findViewById(R.id.coffe_selected);
-                TextView dialog_prize = (TextView) myDialog.findViewById(R.id.prize);
+                final TextView dialog_name = (TextView) myDialog.findViewById(R.id.coffe_selected);
+                final TextView dialog_prize = (TextView) myDialog.findViewById(R.id.prize);
                 ImageView exit = (ImageView) myDialog.findViewById(R.id.exit);
-                ImageView dialog_image = (ImageView) myDialog.findViewById(R.id.coffee_image);
+                final ImageView dialog_image = (ImageView) myDialog.findViewById(R.id.coffee_image);
                 dialog_prize.setText("₱" + apps.get(vHolder.getAdapterPosition()).getSize());
                 dialog_name.setText(apps.get(vHolder.getAdapterPosition()).getName());
                 dialog_image.setImageResource(apps.get(vHolder.getAdapterPosition()).getImage());
                 myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 Button btn = myDialog.findViewById(R.id.proceed);
-                Button btnInsert = (Button) myDialog.findViewById(R.id.reserve);
 
                 exit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         myDialog.dismiss();
+                    }
+                });
+                reserve.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String bagItems = numOfReserve.getText().toString();
+                        int startCount = Integer.parseInt((bagItems));
+                        String prize =(dialog_prize.getText().toString());
+                        startCount++;
+                        numOfReserve.setText("" + startCount);
+                        myDialog.dismiss();
+
+                        Toast.makeText(context, "Added to Bag ", Toast.LENGTH_SHORT).show();
+                        processInsert(dialog_name.getText().toString(),prize);
+                    }
+
+                    private void processInsert(String n,String c) {
+                        String res = new DBManager(context).addRecord(n,c);
+
+                        dialog_name.setText(apps.get(vHolder.getAdapterPosition()).getName());
+                        Toast.makeText(context,res,Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
@@ -118,11 +128,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         });
         return vHolder;
-    }
-
-    public void insertItem(int position) {
-        appList1.add(position, new PopularCoffee(R.drawable.youtube, "Youtube" + position, (int) 40.00));
-        adapter.notifyItemInserted(position);
     }
 
     @Override
