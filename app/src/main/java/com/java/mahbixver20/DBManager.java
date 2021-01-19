@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 public class DBManager extends SQLiteOpenHelper {
 
-    public static final String dbName = "dbContact";
+    private static final String dbName = "dbContact";
 
     public DBManager(@Nullable Context context) {
         super(context, dbName, null, 1);
